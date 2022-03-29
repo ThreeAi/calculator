@@ -7,7 +7,7 @@ namespace calculator
         static void Main(string[] args)
         {
             string str;                                              
-            str = "2+2/0 ";
+            str = "7*(4/8) ";
             Console.WriteLine(Calc(str));
         }
         public static double Calc(string str)
@@ -29,13 +29,10 @@ namespace calculator
                 }
                 else
                 {
-                    ind2 = Define(str[i]);                   
-                    Action(ind1, ind2, str[i], stT, stE);
-                    if (ind2 != 6)
-                         ind1 = ind2;
-
-                }
-               
+                    ind2 = Define(str[i]);  
+                    ind1 = Define(Convert.ToChar(stT.Peek()));
+                    Action(ind1, ind2, str[i], stT, stE);                                           
+                }              
             }
             return Convert.ToDouble(stE.Pop());
         }
@@ -50,21 +47,27 @@ namespace calculator
             switch (mas[ind1, ind2])
             {
                 case 1:
-                    f1(c, stT);
+                    Console.WriteLine(1);
+                    f1(c, stT);                    
                     break;
                 case 2:
+                    Console.WriteLine(2);
                     f2(c, stT, stE);
                     break;
                 case 3:
+                    Console.WriteLine(3);
                     f3(stT);
                     break;
                 case 4:
+                    Console.WriteLine(4);
                     f4(c, stT, stE);
                     break;
                 case 5:
+                    Console.WriteLine(5);
                     Console.WriteLine("Error");
                     break;
                 case 6:
+                    Console.WriteLine(6);
                     break;                    
             }
         }
@@ -99,19 +102,22 @@ namespace calculator
         }
         public static void Operation(MyStack stT, MyStack stE)
         {
+            double a, b;
+            b = Convert.ToDouble(stE.Pop());
+            a = Convert.ToDouble(stE.Pop());
             switch (Convert.ToChar(stT.Pop()))
             {
                 case '*':
-                    stE.Push(Convert.ToString(Convert.ToDouble(stE.Pop()) * Convert.ToDouble(stE.Pop())));
+                    stE.Push(Convert.ToString(a * b));
                     break;
                 case '+':
-                    stE.Push(Convert.ToString(Convert.ToDouble(stE.Pop()) + Convert.ToDouble(stE.Pop())));
+                    stE.Push(Convert.ToString(a + b));
                     break;
                 case '/':
-                    stE.Push(Convert.ToString(Convert.ToDouble(stE.Pop()) / Convert.ToDouble(stE.Pop())));
+                    stE.Push(Convert.ToString(a / b));
                     break;
                 case '-':
-                    stE.Push(Convert.ToString(Convert.ToDouble(stE.Pop()) - Convert.ToDouble(stE.Pop())));
+                    stE.Push(Convert.ToString(a - b));
                     break;
             }
         }
