@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace calculator
 {
-    internal class MyStack
+    class MyStack
     {
         public const int StuckSize = 10;
         public const int Empty = -1;
@@ -18,13 +18,20 @@ namespace calculator
         {
             arrStack[++top] = s;
         }
-        public void Pop(out string s)
+        public string Pop()
         {
-            s = arrStack[top--];
+            return arrStack[top--];
         }
-        public void Peek(out string s)
+        public string Peek()
         {
-            s = arrStack[top];
+            if (top == -1)
+                return " ";
+            else
+                return arrStack[top];
+        }
+        public void Del()
+        {
+            top--;
         }
     }
 }
